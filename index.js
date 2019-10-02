@@ -8,27 +8,40 @@
  * 1 express is a dependencies to
  * build server with node
  *
- * 2 body-parser
- * this dependencies get body request
- * and wrap it in a javascirpt object
- *
- * 3 helmet
+ * 2 helmet
  * this dependencies is a wrapped
  * of multiples good practices of security
  */
 const express = require('express')
-const bodyParser = require('body-parser')
 const helmet = require('helmet')
+const { check, validationResult } = require('express-validator')
 
-const Port = process.env.PORT
+const Port = process.env.PORT || 3000
 const app = express()
 
 // start inject middlewares
 
-app.use(bodyParser.json())
+app.use(express.json())
 app.use(helmet())
 
 // end middleware
+
+// start routes
+
+app.post('/notify', [
+  check('products').isArray()
+], (req, res, next) => {
+  const errors = validationResult(req)
+  if (!errors.isEmpty()) {
+    return res.status(422).json({ errors: 'invalid data' })
+  }
+  next()
+},
+(req, res) => {
+  const { products } = req.body
+  console.log(products)
+  res.send(`products are ${products}`)
+})
 
 // bind server to port
 app.listen(Port, err => {
