@@ -15,6 +15,7 @@
 const express = require('express')
 const helmet = require('helmet')
 const { check, validationResult } = require('express-validator')
+const lib = require('./lib')
 
 const Port = process.env.PORT || 3000
 const app = express()
@@ -37,9 +38,10 @@ app.post('/notify', [
   }
   next()
 },
-(req, res) => {
+async (req, res) => {
   const { products } = req.body
   console.log(products)
+  await lib.sendMail('ces1508@gmail.com', 'test')
   res.send(`products are ${products}`)
 })
 
