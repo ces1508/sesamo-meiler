@@ -15,10 +15,16 @@
 const express = require('express')
 const helmet = require('helmet')
 const { check, validationResult } = require('express-validator')
+const exphbs = require('express-handlebars')
 const lib = require('./lib')
 
 const Port = process.env.PORT || 3000
 const app = express()
+const hbs = exphbs.create({})
+
+// set handlebars as template engine
+app.engine('.hbs', exphbs({extname: '.hbs'}))
+app.set('view engine', 'hbs')
 
 // start inject middlewares
 
@@ -40,9 +46,15 @@ app.post('/notify', [
 },
 async (req, res) => {
   const { products } = req.body
-  console.log(products)
-  await lib.sendMail('ces1508@gmail.com', 'test')
-  res.send(`products are ${products}`)
+  try {
+    await lib.sendMail('ces1508@gmail.com', 'Nueva orden de compra', { ...req.body})
+    res.render('mail/template', { ...req.body })
+  } catch (e) {
+    res.status(500).json({ error: {
+      message: e.message,
+      stack: e.stack
+    } })
+  }
 })
 
 // bind server to port
