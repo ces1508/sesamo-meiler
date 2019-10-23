@@ -48,7 +48,9 @@ async (req, res) => {
   const { products } = req.body
   try {
     await lib.sendMail('ces1508@gmail.com', 'Nueva orden de compra', { ...req.body})
-    res.render('mail/template', { ...req.body })
+    res.status(201).json({
+      status: 'mailer sent'
+    })
   } catch (e) {
     res.status(500).json({ error: {
       message: e.message,
