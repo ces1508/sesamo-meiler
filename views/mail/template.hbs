@@ -1,0 +1,106 @@
+
+<div style="
+    box-sizing: border-box;
+    margin: 0 auto;
+    padding: 1.5em;
+    width: 650px;">
+    <h1 style="
+        box-sizing: border-box;
+        font-size: 1.5em; 
+        text-align: center; 
+        font-weight: bold;
+        text-transform: uppercase;">
+        nueva compra !
+    </h1>
+    <div style="
+        font-weight: bold;
+        box-sizing: border-box;
+        padding: 1em;
+        margin: 1em 0;
+        border-radius: 10px;
+        background-color: #fff;">
+        <h2>datos de usuario</h2>
+        <p>nombre: {{ user.name }}</p>
+        <p>dirección: {{ user.address }}</p>
+        <p>telefono: {{ user.phone }}</p>
+    </div>
+
+    <div style="
+            font-weight: bold;
+        box-sizing: border-box;
+        padding: 1em;
+        margin: 1em 0;
+        border-radius: 10px;
+        background-color: #fff;">
+
+        <table 
+            style="width: 100%; 
+            border-spacing: 0; 
+            box-sizing: content-box;
+            border: 1px solid gray" 
+            border="0">
+            <thead>
+                <tr style="background-color: #000;">
+                <th style="padding: 1em; text-align: center; text-transform: uppercase; color:#fff;">producto</th>
+                <th style="padding: 1em; text-align: center; text-transform: uppercase; color:#fff;">cantidad</th>
+                <th style="padding: 1em; text-align: center; text-transform: uppercase; color:#fff;">con</th>
+                <th style="padding: 1em; text-align: center; text-transform: uppercase; color:#fff;">sin</th>
+            </tr>
+            </thead>
+            <tbody>
+                {{#each products}}
+                <tr>
+                    <td style="
+                        padding: .5em; 
+                        text-align: center; 
+                        text-transform: capitalize;
+                        border: 1px solid #000;">
+                        {{name}}
+                    </td>
+                    <td style="
+                        padding: .5em; 
+                        text-align: center; 
+                        text-transform: capitalize;
+                        border: 1px solid #000;">
+                        {{quantity}}
+                    </td>
+                    <td style="
+                        padding: .5em; 
+                        text-align: center; 
+                        text-transform: capitalize;
+                        border: 1px solid #000;">
+                        <ul style="margin: 0; padding: 0;">
+                            {{#each additionals}}
+                                <li style="margin-left: 5px; list-style:none;">* {{name}}</li>
+                            {{/each}}
+
+                        </ul>
+                    </td>
+                    <td style="
+                        padding: .5em; 
+                        text-align: center; 
+                        text-transform: capitalize;
+                        border: 1px solid #000;">
+                        <ul style="margin: 0; padding: 0;">
+                            {{#each without}}
+                                <li style="margin-left: 5px; list-style:none;">* {{name}}</li>
+                            {{/each}}
+                        </ul>
+                    </td>
+                </tr>
+                {{/each }}
+            </tbody>
+        </table>
+    </div>
+    <div style="
+        font-weight: bold;
+        box-sizing: border-box;
+        padding: 1em;
+        margin: 1em 0;
+        border-radius: 10px;
+        background-color: #fff;">
+        <p style="font-size: 1.5em; text-transform:capitalize; margin: 1em 0;">observaciones</p>
+        <p>{{observations}}</p>
+    </div>
+</div>
+
