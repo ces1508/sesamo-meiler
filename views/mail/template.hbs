@@ -21,6 +21,8 @@
         background-color: #fff;">
         <h2>datos de usuario</h2>
         <p>nombre: {{ user.name }}</p>
+        <p>ciudad: {{ user.city }}</p>
+        <p>barrio: {{ user.barrio }}</p>
         <p>dirección: {{ user.address }}</p>
         <p>telefono: {{ user.phone }}</p>
     </div>
@@ -70,7 +72,7 @@
                         text-transform: capitalize;
                         border: 1px solid #000;">
                         {{#if bread }}
-                        <p>{{#bread.name}}</p>
+                        <p> Pan: {{ bread.name}}</p>
                         <br />
                         {{/if}}
                         <ul style="margin: 0; padding: 0;">
