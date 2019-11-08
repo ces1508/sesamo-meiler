@@ -47,7 +47,7 @@ app.post('/notify', [
 async (req, res) => {
   const { products } = req.body
   try {
-    await lib.sendMail('ces1508@gmail.com', 'Nueva orden de compra', { ...req.body})
+    await lib.sendMail('sesamoburger@gmail.com', 'Nueva orden de compra', { ...req.body})
     res.status(201).json({
       status: 'mailer sent'
     })
